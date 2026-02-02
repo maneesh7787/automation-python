@@ -45,8 +45,25 @@ target_url = "https://example.com/exhibitions"
 
 - **CSV Filename**: Change `CSV_FILENAME` to customize output file name
 - **Timeouts**: Adjust `TIMEOUT`, `MIN_DELAY`, `MAX_DELAY` for different sites
+- **ChromeDriver Path**: If you have ChromeDriver installed locally, set `CHROMEDRIVER_PATH`
 - **Proxy**: Uncomment and configure proxy settings if needed
 - **Headless Mode**: Uncomment headless option in `setup_driver()` function
+
+### Using Custom ChromeDriver Path
+
+If you have ChromeDriver installed in your local directory (same folder or specific location), you can specify the path:
+
+```python
+# In exhibition_scraper.py, CONFIG section
+CHROMEDRIVER_PATH = "./chromedriver"  # For Linux/Mac
+# Or
+CHROMEDRIVER_PATH = "./chromedriver.exe"  # For Windows
+# Or full path
+CHROMEDRIVER_PATH = "C:/path/to/chromedriver.exe"  # Windows
+CHROMEDRIVER_PATH = "/usr/local/bin/chromedriver"  # Linux/Mac
+```
+
+**Note**: If `CHROMEDRIVER_PATH` is `None` or the file doesn't exist, the script will automatically use `webdriver-manager` to download and manage ChromeDriver.
 
 ## 🔹 Usage
 

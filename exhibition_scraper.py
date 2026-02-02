@@ -64,6 +64,11 @@ TIMEOUT = 15  # seconds
 MIN_DELAY = 2  # seconds
 MAX_DELAY = 5  # seconds
 
+# ChromeDriver Configuration (Optional - Uncomment to use custom path)
+# If you have chromedriver in the same folder or a specific location, set the path here
+# Leave as None to use webdriver-manager for automatic driver management
+CHROMEDRIVER_PATH = None  # Example: "./chromedriver" or "C:/path/to/chromedriver.exe"
+
 # Proxy Configuration (Optional - Uncomment to use)
 # PROXY = "http://your-proxy-server:port"
 # PROXY_AUTH = {"username": "user", "password": "pass"}  # if needed
@@ -120,12 +125,21 @@ def setup_driver() -> webdriver.Chrome:
     # if 'PROXY' in globals():
     #     chrome_options.add_argument(f'--proxy-server={PROXY}')
     
-    # Initialize driver with webdriver-manager
+    # Initialize driver
+    # Priority: 1. Custom path (if provided), 2. webdriver-manager, 3. System driver
     try:
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service, options=chrome_options)
+        if CHROMEDRIVER_PATH and os.path.exists(CHROMEDRIVER_PATH):
+            # Use custom ChromeDriver path
+            logger.info(f"Using custom ChromeDriver from: {CHROMEDRIVER_PATH}")
+            service = Service(executable_path=CHROMEDRIVER_PATH)
+            driver = webdriver.Chrome(service=service, options=chrome_options)
+        else:
+            # Use webdriver-manager for automatic driver management
+            logger.info("Using webdriver-manager for automatic ChromeDriver management")
+            service = Service(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service, options=chrome_options)
     except Exception as e:
-        logger.error(f"Failed to initialize driver with webdriver-manager: {e}")
+        logger.error(f"Failed to initialize driver: {e}")
         logger.info("Attempting to use system Chrome driver...")
         driver = webdriver.Chrome(options=chrome_options)
     

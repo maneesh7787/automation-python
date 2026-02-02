@@ -15,7 +15,26 @@ This file demonstrates how to use the exhibition scraper with different configur
 #    python exhibition_scraper.py
 
 # ============================================================================
-# EXAMPLE 2: Using with Proxy
+# EXAMPLE 2: Using Custom ChromeDriver Path
+# ============================================================================
+
+# If you have chromedriver installed in the same folder:
+# In exhibition_scraper.py CONFIG section:
+# CHROMEDRIVER_PATH = "./chromedriver"  # Linux/Mac
+# Or
+# CHROMEDRIVER_PATH = "./chromedriver.exe"  # Windows
+
+# If you have chromedriver installed in a specific location:
+# CHROMEDRIVER_PATH = "C:/tools/chromedriver.exe"  # Windows full path
+# CHROMEDRIVER_PATH = "/usr/local/bin/chromedriver"  # Linux/Mac full path
+
+# To verify your chromedriver:
+# On Linux/Mac: ls -la chromedriver
+# On Windows: dir chromedriver.exe
+# Make sure it has execute permissions on Linux/Mac: chmod +x chromedriver
+
+# ============================================================================
+# EXAMPLE 3: Using with Proxy
 # ============================================================================
 
 # In exhibition_scraper.py, uncomment and configure:
@@ -25,14 +44,14 @@ This file demonstrates how to use the exhibition scraper with different configur
 # chrome_options.add_argument(f'--proxy-server={PROXY}')
 
 # ============================================================================
-# EXAMPLE 3: Headless Mode (No Browser Window)
+# EXAMPLE 4: Headless Mode (No Browser Window)
 # ============================================================================
 
 # In setup_driver() function, uncomment:
 # chrome_options.add_argument('--headless')
 
 # ============================================================================
-# EXAMPLE 4: Custom Delays for Slower Websites
+# EXAMPLE 5: Custom Delays for Slower Websites
 # ============================================================================
 
 # In exhibition_scraper.py CONFIG section, modify:
@@ -41,7 +60,7 @@ This file demonstrates how to use the exhibition scraper with different configur
 # TIMEOUT = 30  # Increase from 15 to 30 seconds
 
 # ============================================================================
-# EXAMPLE 5: Resuming After Interruption
+# EXAMPLE 6: Resuming After Interruption
 # ============================================================================
 
 # 1. Open exhibitions_data.csv
@@ -56,7 +75,7 @@ This file demonstrates how to use the exhibition scraper with different configur
 # target_url = "https://www.example-exhibitions.com/trade-shows?page=6"
 
 # ============================================================================
-# EXAMPLE 6: Checking Failed URLs
+# EXAMPLE 7: Checking Failed URLs
 # ============================================================================
 
 # After scraping completes, review failed_urls.txt:
@@ -70,14 +89,14 @@ with open('failed_urls.txt', 'r') as f:
 """
 
 # ============================================================================
-# EXAMPLE 7: Custom CSV Filename
+# EXAMPLE 8: Custom CSV Filename
 # ============================================================================
 
 # In exhibition_scraper.py CONFIG section:
 # CSV_FILENAME = "my_custom_exhibitions_2024.csv"
 
 # ============================================================================
-# EXAMPLE 8: Programmatic Usage (Import as Module)
+# EXAMPLE 9: Programmatic Usage (Import as Module)
 # ============================================================================
 
 """
@@ -103,7 +122,7 @@ driver.quit()
 """
 
 # ============================================================================
-# EXAMPLE 9: Testing with Small Sample
+# EXAMPLE 10: Testing with Small Sample
 # ============================================================================
 
 # To test without scraping all pages, modify the main() function:
@@ -119,7 +138,7 @@ while page_number <= MAX_PAGES_TO_SCRAPE:
 """
 
 # ============================================================================
-# EXAMPLE 10: Monitoring Progress
+# EXAMPLE 11: Monitoring Progress
 # ============================================================================
 
 # Watch the log file in real-time:
